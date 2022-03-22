@@ -1,0 +1,34 @@
+{
+    "Blogs": [
+      {
+        "id": 1,
+        "auther": "Waleed Shehbaz",
+        "title": "Welcome to first Blog",
+        "Body": "Is your Ecommerce content driving sales? At CreativeDrive, we’ll not only help you understand how your Ecommerce content is impacting your bottom line, but also help you understand why. Let our Ecommerce Optimization Team audit the current state of your online content on retailers, social media platforms, and your own branded website. We’ll compare what you’re doing to your top competitors, uncovering gaps and finding opportunities for improvement to help fuel your growth."
+      },
+      {
+        "id": 2,
+        "auther": "Ali Saad",
+        "title": "Welcome to second Blog",
+        "Body": "Is your Ecommerce content driving sales? At CreativeDrive, we’ll not only help you understand how your Ecommerce content is impacting your bottom line, but also help you understand why. Let our Ecommerce Optimization Team audit the current state of your online content on retailers, social media platforms, and your own branded website. We’ll compare what you’re doing to your top competitors, uncovering gaps and finding opportunities for improvement to help fuel your growth."
+      },
+      {
+        "id": 3,
+        "auther": "GM",
+        "title": "Welcome to third Blog",
+        "Body": "Is your Ecommerce content driving sales? At CreativeDrive, we’ll not only help you understand how your Ecommerce content is impacting your bottom line, but also help you understand why. Let our Ecommerce Optimization Team audit the current state of your online content on retailers, social media platforms, and your own branded website. We’ll compare what you’re doing to your top competitors, uncovering gaps and finding opportunities for improvement to help fuel your growth."
+      },
+      {
+        "title": "Title is Here",
+        "body": "Any kind of Body",
+        "auther": "ali",
+        "id": 5
+      },
+      {
+        "title": "jkh",
+        "body": "jkh",
+        "auther": "waleed",
+        "id": 7
+      }
+    ]
+  }

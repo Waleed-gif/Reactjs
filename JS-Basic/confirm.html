@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // var a = confirm("Do you Like our Site");
+        // if(a){
+        //     alert("thanks");
+        // }else{
+        //     alert("sorry");
+        // }
+
+        // var a=1;
+        // while(a <= 100){
+        //     document.write(a + " Loop structure<br>");
+        //     a = a+1;
+        // }
+        
+        // document.write("<ul");
+        // for(a=0; a<=10; a++){
+        //     document.write(a + ") For Loop<br>");
+        // }
+        // document.write("</ul");
+            // do {
+            //     document.write("Do while loop<br>");
+            //     a = a+1;
+            // } while (a<=10);
+//break and continue
+            // for(var i=1; i<=10; i++)
+            // {
+            //     if(i == 5){
+            //         document.write("Hey : " + i + "<br>");
+            //         //continue;
+            //         break;
+            //     }
+            //     document.write("Number : " + i + "<br>");
+            // }
+
+//Multidimensional Array
+var arr= [
+        ["Waleed", 22, "CS"],
+        ["Ali", 22, "CS"],
+        ["GM", 23, "CS"],
+        ["Khizer", 12, "Physics"],
+];
+    document.write(arr.length);
+    document.write("<table border='1px' cellspacing= '0'>");
+    for (var a=0; a<arr.length; a++){
+        document.write("<tr>");
+        for(var b=0; b<arr[a].length; b++)
+        {
+            document.write("<td>" + arr[a][b] + "</td>");
+        }
+        document.write("</tr>");
+    }
+    document.write("</table>");
+    </script>
+
+</head>
+
+
+<body>
+    
+</body>
+</html>

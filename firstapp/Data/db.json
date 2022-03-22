@@ -1,0 +1,24 @@
+{
+    "posts":[
+    {
+        "id": 1, 
+        "title": "Any Title",
+        "body": "If you're Good at Something, don't do it for free",
+        "author": "Waleed"
+    },
+    {
+        "id": 2, 
+        "title": "Any Title 2",
+        "body": "Passage",
+        "author": "Khizer"
+    }
+    ],
+    "pulls":[
+        {
+            "id": 1, 
+            "title": "Any Title",
+            "body": "Passage",
+            "author": "Khizer"
+        }
+    ]
+}
