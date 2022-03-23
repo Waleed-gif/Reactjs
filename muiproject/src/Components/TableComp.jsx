@@ -44,14 +44,28 @@ export default function BasicTable() {
         const data = event.target.value;
         console.log(data,"Data input");
         setSearch(data);
-    };    
+    };
 
+    function getShortMessages() {
+        {rows.filter((val) => {
+            if(search == ""){
+                console.log(val,"if");
+            }
+            else if(val.name.toLowerCase().includes(search.toLowerCase())){
+                let arr = [];
+                arr.push(val)
+                setRows(arr);
+                console.log(val,"else");
+            }
+            })}
+    }
+    // const msg = getShortMessages();
     //which line is written in this piece of code??
     useEffect(()=> {
-
-    }, [search]);
+        getShortMessages();
+    }, [search]);   
     
-    console.log(search,"searchsearch");
+    //console.log(search,"searchsearch");
     
     return(
     <React.Fragment>
@@ -72,16 +86,8 @@ export default function BasicTable() {
                     <TableCell align='center'> <EmailIcon /> </TableCell>
                 </TableRow>
             </TableHead>
-            {/* .filter(a => a.name === "Waleed") */}
             <TableBody>
-            {data.filter((val) => {
-                if(search == ""){
-                    return val
-                }else if(val.name.toLowerCase().includes(search.toLowerCase())){
-                    return val
-                }
-            })
-            .map((row) => (
+            {rows.map((row) => (
                 <TableRow key={row.id}>
                     <TableCell align='center'>{row.id}</TableCell>
                     <TableCell align='center'>{row.name}</TableCell>
