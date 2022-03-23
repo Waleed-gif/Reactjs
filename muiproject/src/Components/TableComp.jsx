@@ -38,6 +38,7 @@ export default function BasicTable() {
 
     const [rows, setRows] = useState(data);
     const [search, setSearch] = useState('');
+    const [output, setOutput] = useState([]);
     
 
     const inputEvent = (event) => {
@@ -46,23 +47,33 @@ export default function BasicTable() {
         setSearch(data);
     };
 
-    function getShortMessages() {
-        {rows.filter((val) => {
+    // function getShortMessages() {
+    //     {rows.filter((val) => {
+    //         if(search == ""){
+    //             console.log(val,"if");
+    //         }
+    //         else if(val.name.toLowerCase().includes(search.toLowerCase())){
+    //             let arr = [];
+    //             arr.push(val)
+    //             setRows(arr);
+    //             console.log(val,"else");
+    //         }
+    //         })}
+    // }
+    // const msg = getShortMessages();
+    
+    useEffect(()=> {
+        setOutput([])
+        rows.filter((val) => {
             if(search == ""){
+                setOutput(output => [...output, val])
                 console.log(val,"if");
             }
             else if(val.name.toLowerCase().includes(search.toLowerCase())){
-                let arr = [];
-                arr.push(val)
-                setRows(arr);
+                setOutput(output => [...output, val])
                 console.log(val,"else");
             }
-            })}
-    }
-    // const msg = getShortMessages();
-    //which line is written in this piece of code??
-    useEffect(()=> {
-        getShortMessages();
+            })
     }, [search]);   
     
     //console.log(search,"searchsearch");
@@ -87,7 +98,7 @@ export default function BasicTable() {
                 </TableRow>
             </TableHead>
             <TableBody>
-            {rows.map((row) => (
+            {output.map((row) => (
                 <TableRow key={row.id}>
                     <TableCell align='center'>{row.id}</TableCell>
                     <TableCell align='center'>{row.name}</TableCell>
