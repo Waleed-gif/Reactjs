@@ -6,6 +6,7 @@ import HeightIcon from '@mui/icons-material/Height';
 import AvTimerIcon from '@mui/icons-material/AvTimer';
 import EmailIcon from '@mui/icons-material/Email';
 import { Paper } from '@mui/material';
+import { formControlUnstyledClasses } from '@mui/base';
 // import SearchIcon from '@mui/icons-material/Search';
 // import IconButton from '@mui/material/IconButton';
 
@@ -38,7 +39,6 @@ export default function BasicTable() {
 
     const [rows, setRows] = useState(data);
     const [search, setSearch] = useState('');
-    const [output, setOutput] = useState([]);
     
 
     const inputEvent = (event) => {
@@ -47,37 +47,22 @@ export default function BasicTable() {
         setSearch(data);
     };
 
-    // function getShortMessages() {
-    //     {rows.filter((val) => {
-    //         if(search == ""){
-    //             console.log(val,"if");
-    //         }
-    //         else if(val.name.toLowerCase().includes(search.toLowerCase())){
-    //             let arr = [];
-    //             arr.push(val)
-    //             setRows(arr);
-    //             console.log(val,"else");
-    //         }
-    //         })}
-    // }
-    // const msg = getShortMessages();
-    
-    useEffect(()=> {
-        setOutput([])
-        rows.filter((val) => {
-            if(search == ""){
-                setOutput(output => [...output, val])
-                console.log(val,"if");
+    function getFiltered(rows) {
+        const fil = rows.filter((val) => {
+            if (search == "") {
+                console.log(val);
+                return val;
+            }else if (val.name.toLowerCase().includes(search.toLowerCase())) {
+                    console.log(val);
+                    return val;
             }
-            else if(val.name.toLowerCase().includes(search.toLowerCase())){
-                setOutput(output => [...output, val])
-                console.log(val,"else");
-            }
-            })
-    }, [search]);   
-    
-    //console.log(search,"searchsearch");
-    
+          })
+            console.log(fil, "filtered Array");
+            return fil;
+        };
+        // const row =useState(getFiltered());
+        // console.log(row);
+
     return(
     <React.Fragment>
     <Paper>
@@ -98,7 +83,7 @@ export default function BasicTable() {
                 </TableRow>
             </TableHead>
             <TableBody>
-            {output.map((row) => (
+            {getFiltered(rows).map((row) => (
                 <TableRow key={row.id}>
                     <TableCell align='center'>{row.id}</TableCell>
                     <TableCell align='center'>{row.name}</TableCell>
