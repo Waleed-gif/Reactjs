@@ -1,25 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import {Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material';
+import {Checkbox, Drawer, Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material';
 import NumbersIcon from '@mui/icons-material/Numbers';
 import PersonIcon from '@mui/icons-material/Person';
 import HeightIcon from '@mui/icons-material/Height';
 import AvTimerIcon from '@mui/icons-material/AvTimer';
 import EmailIcon from '@mui/icons-material/Email';
 import { Paper } from '@mui/material';
-import { formControlUnstyledClasses } from '@mui/base';
-// import SearchIcon from '@mui/icons-material/Search';
-// import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
 
-// making Function of data and use varabile row to store it
-    // function data(id, name, age, height, email){
-    //     return { id, name, age, height, email};
-    // }
-    // const rows = [
-    //     data(1, "Waleed", 22, 5.7, "waleed@gmail.com"),
-    //     data(2, "Khizer", 10, 4.0, "khizer@gmail.com"),
-    //     data(3, "Ali Saad", 22, 5.9, "ali@gmail.com"),
-    //     data(4, "Haider", 22, 6.1, "haider@gmail.com")
-    // ];
 
 export default function BasicTable() {
     const data = [
@@ -39,8 +31,18 @@ export default function BasicTable() {
 
     const [rows, setRows] = useState(data);
     const [search, setSearch] = useState('');
-    
 
+//Drop Down Menu in Table
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+//Search with filter in Functions
     const inputEvent = (event) => {
         const data = event.target.value;
         console.log(data,"Data input");
@@ -50,31 +52,103 @@ export default function BasicTable() {
     function getFiltered(rows) {
         const fil = rows.filter((val) => {
             if (search == "") {
-                console.log(val);
+                // console.log(val);
                 return val;
             }else if (val.name.toLowerCase().includes(search.toLowerCase())) {
                     console.log(val);
                     return val;
             }
           })
-            console.log(fil, "filtered Array");
+            //console.log(fil, "filtered Array");
             return fil;
         };
         // const row =useState(getFiltered());
         // console.log(row);
 
+//checkbox value Validation
+        const [check, setCheck] = useState([]);
+        const getValue = (e, row) => {
+            let checked = check;
+            checked.push(row);
+            if (checked != '') {
+                    setCheck(checked);
+                    //console.log(checked, "CheckBox");
+            }else if(checked == ''){
+                setCheck([]);
+            }
+            console.log(checked,"Function value");
+            return checked;
+        }
+
+
+//Delete Event
+const deleteItem = ()=> {   
+    console.log(check,"checkcheckcheck");     
+    var del = getFiltered(rows).filter((e) => !check.includes(e));
+    alert("Are you sure " + check);
+    console.log(del,"Sorted Array After Delete ");
+    setRows(del);
+}
+
+//View Event
+    const [state, setState] = useState(false);
+    const toggleDrawer = (anchor, open) => (event) => {
+        setState({ ...state, [anchor]: open });
+    };
+
+    const list = (data) =>(
+        <Box>
+            <p>Drawer Component Value...</p>
+        </Box>
+    );
+
+
     return(
     <React.Fragment>
     <Paper>
         <input 
-            type="search" 
+            type="search"   
             onChange={inputEvent}
             value={search}
             placeholder="Search..." 
         />
+        <Button
+            id="basic-button"
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+        > <MenuIcon />  </Button>
+        <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+        >
+            <MenuItem onClick={handleClose}>
+                <Button onClick={toggleDrawer(data, true)}>View</Button>
+                <Drawer
+                    data={data}
+                    open={state[data]}
+                    onClose={toggleDrawer(data, false)}
+                >{list(data)}
+                </Drawer>
+                
+                
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+                <Button>Update</Button>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+                <Button
+                    onClick={() => deleteItem()}
+                >Delete</Button>
+            </MenuItem>
+        </Menu>
         <Table aria-label="table">
             <TableHead sx={{backgroundColor: "lightblue"}} >
                 <TableRow>
+                    <TableCell align='center'> CheckBox </TableCell>
                     <TableCell align='center'> <NumbersIcon /> </TableCell>
                     <TableCell align='center'> <PersonIcon /> </TableCell>
                     <TableCell align='center'> <AvTimerIcon /> </TableCell>
@@ -85,16 +159,27 @@ export default function BasicTable() {
             <TableBody>
             {getFiltered(rows).map((row) => (
                 <TableRow key={row.id}>
-                    <TableCell align='center'>{row.id}</TableCell>
-                    <TableCell align='center'>{row.name}</TableCell>
-                    <TableCell align='center'>{row.age} (Year)</TableCell>
+                    <TableCell align='center'> 
+                        <Checkbox 
+                            name="check"
+                            // value={check.find((x) => x.id == row.id)} 
+                            value={check}
+                            onChange={(e) => {getValue(e,row)}}    
+                        /> 
+                    </TableCell>
+                    <TableCell align='center'>{row.id} </TableCell>
+                    <TableCell align='center'>{row.name} </TableCell>
+                    <TableCell align='center'>{row.age} (Year) </TableCell>
                     <TableCell align='center'>{row.height} (Feet) </TableCell>
-                    <TableCell align='center'>{row.email}</TableCell>
+                    <TableCell align='center'>{row.email} </TableCell>
+                    
                 </TableRow>
-            ))}
+                ))}
+
             </TableBody>
         </Table>       
     </Paper>
+
     </React.Fragment>
     )
 }
